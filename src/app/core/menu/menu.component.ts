@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Covid19Service } from '../services/covid19.service';
 
 @Component({
   selector: 'app-menu',
@@ -6,10 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  countriesData: any;
 
-  constructor() { }
+  constructor(private covidService: Covid19Service) { }
 
   ngOnInit(): void {
+    this.getCountriesList();
+  }
+
+  getCountriesList() {
+    this.covidService.getCountriesData().subscribe(countries => {
+    this.countriesData = countries;
+    });
+  }
+
+  getCountry(country) {
+
   }
 
 }

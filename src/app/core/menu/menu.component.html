@@ -1,1 +1,11 @@
-<p>menu works!</p>
+<div class="menu">
+  <input class="menu__searchbar" type="search" placeholder="Busque por um país" />
+  <ul *ngFor="let country of countriesData">
+    <a href="#about">
+      <li>
+        <img width="20" [src]="country.countryInfo.flag" />
+        <span class="menu__item">{{ country.country }}</span>
+      </li>
+    </a>
+  </ul>
+</div>
