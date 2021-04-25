@@ -55,7 +55,7 @@ describe('Covid19Service', () => {
   it('deve retornar a lista de países', inject(
     [Covid19Service],
     (covid19Service: Covid19Service) => {
-      covid19Service.getCountriesList().subscribe((event: HttpEvent<any>) => {
+      covid19Service.getCountriesData().subscribe((event: HttpEvent<any>) => {
         switch (event.type) {
           case HttpEventType.Response:
             expect(event.body).toEqual(mockResponse);
