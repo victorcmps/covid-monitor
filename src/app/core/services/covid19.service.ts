@@ -10,14 +10,14 @@ export class Covid19Service {
   constructor(private http: HttpClient) { }
 
   getAllCovidData(): Observable<any> {
-    return this.http.get('https://disease.sh/v3/covid-19/all');
+    return this.http.get(`https://disease.sh/v3/covid-19/all`);
   }
 
-  getCountriesData(): Observable<any> {
-    return this.http.get('https://disease.sh/v3/covid-19/countries');
+  getCountriesData(country?: number): Observable<any> {
+    return this.http.get(`https://disease.sh/v3/covid-19/countries/${country || ''}`);
   }
 
-  getCountry(country): Observable<any> {
-    return this.http.get('');
+  getHistory(country?: number): Observable<any> {
+    return this.http.get(`https://disease.sh/v3/covid-19/historical/${country}?lastdays=10`);
   }
 }
