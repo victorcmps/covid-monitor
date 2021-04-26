@@ -1,0 +1,74 @@
+::ng-deep .ngx-charts { text { fill: #fff !important; } }
+
+.country {
+  &__title, &__logo {
+    display: flex;
+    align-items: center;
+  }
+
+  &__logo {
+    img {
+        width: 70px;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        margin-right: 20px;
+      }
+  }
+
+  &__info {
+      margin-left: 15px;
+  }
+
+  &__body {
+    display: flex;
+  }
+
+  &__card {
+    background: #222222;
+    border-radius: 5px;
+    padding: 20px;
+    width: 25%;
+    margin-right: 15px;
+    margin-top: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+
+    &--chart {
+        height: 500px;
+        width: calc(100% - 50px);
+
+        .chart {
+            height: 450px;
+        }
+    }
+  }
+  &__chart {
+      margin-top: 20px;
+      display: flex;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .country {
+    &__body {
+      flex-wrap: wrap;
+    }
+    &__card {
+      width: 36%;
+      &--chart {
+          width: calc(100% - 50px);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 864px) {
+  .country {
+    &__body {
+      display: block;
+      flex-wrap: wrap;
+    }
+    &__card {
+      width: inherit;
+    }
+  }
+}

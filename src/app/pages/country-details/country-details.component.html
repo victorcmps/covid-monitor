@@ -1,1 +1,58 @@
-<p>country-details works!</p>
+<div class="country__title">
+  <div class="country__logo">
+    <img [src]="countryData?.countryInfo.flag" />
+    <h1>{{ countryData?.country }}</h1>
+  </div>
+  <div class="country__info">
+    Population: {{ countryData?.population | number }}
+    <br />
+    Continent: {{ countryData?.continent }}
+  </div>
+</div>
+<div class="country__body">
+  <div class="country__card">
+    <h2>Confirmed cases</h2>
+    <h1>
+      {{ countryData?.cases | number }}
+      <sup>({{ countryData?.todayCases | number }} today) </sup>
+    </h1>
+  </div>
+  <div class="country__card">
+    <h2>Total of recovered</h2>
+    <h1>
+      {{ countryData?.recovered | number }}
+      <sup>({{ countryData?.todayRecovered | number }} today)</sup>
+    </h1>
+  </div>
+  <div class="country__card">
+    <h2>Total of deaths</h2>
+    <h1>
+      {{ countryData?.deaths | number }}
+      <sup>({{ countryData?.todayDeaths | number }} today)</sup>
+    </h1>
+  </div>
+  <div class="country__card">
+    <h2>Total of tests</h2>
+    <h1>
+      {{ countryData?.tests | number }}
+    </h1>
+  </div>
+</div>
+<div class="country__chart">
+  <div class="country__card country__card--chart">
+    <h2>Confirmed cases history (Last 10 days)</h2>
+    <div class="chart">
+      <ngx-charts-bar-vertical
+        [scheme]="chartColorScheme"
+        [results]="casesTimeline"
+        xAxis="true"
+        yAxis="true"
+        legend="true"
+        showXAxisLabel="''"
+        showYAxisLabel="true"
+        yAxisLabel="true"
+      >
+      </ngx-charts-bar-vertical>
+    </div>
+  </div>
+</div>
