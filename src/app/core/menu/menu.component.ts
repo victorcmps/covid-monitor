@@ -17,6 +17,10 @@ export class MenuComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+   this.getCountries();
+  }
+
+  getCountries() {
     combineLatest([
       this.covidService.getCountriesData(),
       this.searchService.search$,
@@ -35,7 +39,7 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  searchCountry(event) {
+  searchCountry(event): void {
     this.searchService.searchCountry(event);
   }
 }
