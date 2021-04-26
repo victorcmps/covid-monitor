@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { catchError } from 'rxjs/operators';
 import { Covid19Service } from 'src/app/core/services/covid19.service';
 
 @Component({
@@ -9,13 +10,7 @@ import { Covid19Service } from 'src/app/core/services/covid19.service';
 })
 export class CountryDetailsComponent implements OnInit {
   chartColorScheme = {
-    domain: [
-      '#35a8e0',
-      '#49b0e3',
-      '#5db9e6',
-      '#71c2e9',
-      '#85caec'
-    ],
+    domain: ['#35a8e0', '#49b0e3', '#5db9e6', '#71c2e9', '#85caec'],
   };
   showXAxis = true;
   showYAxis = true;
@@ -24,6 +19,7 @@ export class CountryDetailsComponent implements OnInit {
 
   countryData: any;
   casesTimeline: any[];
+  historicErrorMsg: string;
   constructor(
     private covidService: Covid19Service,
     private route: ActivatedRoute
@@ -33,8 +29,14 @@ export class CountryDetailsComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.covidService.getCountriesData(params.id).subscribe((country) => {
         this.countryData = country;
+        this.getHistory(params);
       });
-      this.covidService.getHistory(params.id).subscribe((history) => {
+    });
+  }
+
+  getHistory(params): void {
+    this.covidService.getHistory(params.id).subscribe(
+      (history) => {
         this.casesTimeline = [];
         const keys = Object.keys(history.timeline.cases);
         const values = Object.values(history.timeline.cases);
@@ -42,7 +44,10 @@ export class CountryDetailsComponent implements OnInit {
         keys.forEach((key, index) => {
           this.casesTimeline.push({ name: key, value: values[index] });
         });
-      });
-    });
+      }, err => {
+        this.casesTimeline = [];
+        this.historicErrorMsg = 'Country doesn\'t have any historical data';
+      },
+    );
   }
 }
