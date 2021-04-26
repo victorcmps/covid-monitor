@@ -1,11 +1,10 @@
 <div class="menu">
-  <input class="menu__searchbar" type="search" placeholder="Busque por um país" />
-  <ul *ngFor="let country of countriesData">
-    <a href="#about">
-      <li>
-        <img width="20" [src]="country.countryInfo.flag" />
+  <img [routerLink]="['/']" class="menu__logo" src="../../../assets/img/logo.svg">
+  <input class="menu__searchbar" type="search" placeholder="Search for a country" (keyup)="searchCountry($event.target.value)" />
+  <ul>
+      <li *ngFor="let country of countriesData" [routerLink]="['/country-details',country.countryInfo._id]" routerLinkActive="active">
+        <img width="25" [src]="country.countryInfo.flag" />
         <span class="menu__item">{{ country.country }}</span>
       </li>
-    </a>
   </ul>
 </div>
