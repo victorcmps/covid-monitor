@@ -42,17 +42,25 @@
   <div class="country__card country__card--chart">
     <h2>Confirmed cases history (Last 10 days)</h2>
     <div class="chart">
-      <ngx-charts-bar-vertical
-        [scheme]="chartColorScheme"
-        [results]="casesTimeline"
-        xAxis="true"
-        yAxis="true"
-        legend="true"
-        showXAxisLabel="''"
-        showYAxisLabel="true"
-        yAxisLabel="true"
-      >
-      </ngx-charts-bar-vertical>
+      <ng-container *ngIf="casesTimeline.length > 0; else errorMsg">
+        <ngx-charts-bar-vertical
+          [scheme]="chartColorScheme"
+          [results]="casesTimeline"
+          xAxis="true"
+          yAxis="true"
+          legend="true"
+          showXAxisLabel="''"
+          showYAxisLabel="Population"
+          yAxisLabel="true"
+        >
+        </ngx-charts-bar-vertical>
+      </ng-container>
+      <ng-template #errorMsg>
+        <span class="country__no-history">
+          <h2>{{ historicErrorMsg }}</h2>
+        </span>
+        
+      </ng-template>
     </div>
   </div>
 </div>

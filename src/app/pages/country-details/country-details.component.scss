@@ -6,6 +6,12 @@
     align-items: center;
   }
 
+  &__no-history {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+  }
+
   &__logo {
     img {
         width: 70px;
