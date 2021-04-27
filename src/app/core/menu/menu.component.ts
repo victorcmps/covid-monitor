@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
+import { Countries } from '../models/countries.model';
 import { Covid19Service } from '../services/covid19.service';
 import { SearchService } from '../services/search.service';
 
@@ -9,7 +10,7 @@ import { SearchService } from '../services/search.service';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  countriesData: any;
+  countriesData: Countries[];
 
   constructor(
     private covidService: Covid19Service,
@@ -20,14 +21,14 @@ export class MenuComponent implements OnInit {
    this.getCountries();
   }
 
-  getCountries() {
+  getCountries(): void {
     combineLatest([
       this.covidService.getCountriesData(),
       this.searchService.search$,
     ]).subscribe(([countries, search]) => {
-      this.countriesData = countries.filter((countries) => {
+      this.countriesData = countries.filter((country) => {
         if (
-          countries.country
+          country.country
             .toString()
             .toLowerCase()
             .indexOf(search.toLowerCase()) !== -1

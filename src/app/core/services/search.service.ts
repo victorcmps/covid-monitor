@@ -12,7 +12,7 @@ export class SearchService {
   search$ = this.search.asObservable();
 
 
-  searchCountry(event) {
+  searchCountry(event): void {
     this.search.next(event);
   }
 }

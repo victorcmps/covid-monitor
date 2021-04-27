@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { catchError } from 'rxjs/operators';
+import { Countries } from 'src/app/core/models/countries.model';
+import { CountryHistory } from 'src/app/core/models/countries-history.model';
 import { Covid19Service } from 'src/app/core/services/covid19.service';
 
 @Component({
@@ -12,13 +13,9 @@ export class CountryDetailsComponent implements OnInit {
   chartColorScheme = {
     domain: ['#35a8e0', '#49b0e3', '#5db9e6', '#71c2e9', '#85caec'],
   };
-  showXAxis = true;
-  showYAxis = true;
-  showYAxisLabel = true;
-  yAxisLabel = 'Population';
 
-  countryData: any;
-  casesTimeline: any[];
+  countryData: Countries[];
+  casesTimeline: Array<object>;
   historicErrorMsg: string;
   constructor(
     private covidService: Covid19Service,
